@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 import 'colors.dart' as colors;
 import 'textStyles.dart' as textStyles;
 
@@ -36,7 +38,16 @@ class _BottomNavBarUIState extends State<BottomNavBarUI> {
           label: "Communities",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.chat_bubble_outline),
+          icon: SizedBox(
+            height: 24,
+            width: 24,
+            child: SvgPicture.asset("lib/assets/icons/chat.svg",
+                colorFilter: ColorFilter.mode(
+                    currenIndex_ == 3
+                        ? colors.primaryHighlight
+                        : colors.lowGrey,
+                    BlendMode.srcIn)),
+          ),
           label: "Chats",
         ),
         BottomNavigationBarItem(

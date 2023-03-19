@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sensors_plus/sensors_plus.dart';
 
-import 'accelerometerInfo.dart';
+import 'package:sensors_plus/sensors_plus.dart';
+import 'package:background_location/background_location.dart';
+
 import 'items/colors.dart' as colors;
 import 'items/textStyles.dart' as textStyles;
 
 import 'items/chatWidgets.dart' as chatWidgets;
 import 'items/mainWidgets.dart' as mainWidgets;
+
+import 'dataPoints.dart';
+import 'cred.dart' as cred;
 
 import 'dart:async';
 
@@ -41,10 +45,15 @@ class homeScreen extends StatefulWidget {
 
 class _homeScreenState extends State<homeScreen> {
   bool triggerred = false;
+  int lastTap = DateTime.now().millisecondsSinceEpoch;
+  int consecutiveTaps = 0;
+
   @override
   void initState() {
     super.initState();
-    // smt();
+    if (triggerred) {
+      //
+    }
   }
 
   Widget build(BuildContext context) {
@@ -154,10 +163,27 @@ class _homeScreenState extends State<homeScreen> {
                     ],
                   ),
                 ),
-          onDoubleTap: () {
-            setState(() {
-              triggerred = !triggerred;
-            });
+          onTap: () {
+            int now = DateTime.now().millisecondsSinceEpoch;
+            if (now - lastTap < 300) {
+              print("tap");
+
+              consecutiveTaps++;
+              if (consecutiveTaps == 3) {
+                setState(() {
+                  triggerred = !triggerred;
+                  if (triggerred) {
+                    locationUpdates();
+                    // initAccelerometer();
+                  } else {
+                    stopLocationService_();
+                  }
+                });
+              }
+            } else {
+              consecutiveTaps = 1;
+            }
+            lastTap = now;
           },
         ));
   }

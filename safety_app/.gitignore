@@ -46,3 +46,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+#Credentials #This is where I store my API keys and other credentials.
+lib/cred.dart 

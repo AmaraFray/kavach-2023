@@ -1,22 +1,28 @@
 PODS:
+  - background_location (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - sensors_plus (0.0.1):
     - Flutter
 
 DEPENDENCIES:
+  - background_location (from `.symlinks/plugins/background_location/ios`)
   - Flutter (from `Flutter`)
   - sensors_plus (from `.symlinks/plugins/sensors_plus/ios`)
 
 EXTERNAL SOURCES:
+  background_location:
+    :path: ".symlinks/plugins/background_location/ios"
   Flutter:
     :path: Flutter
   sensors_plus:
     :path: ".symlinks/plugins/sensors_plus/ios"
 
 SPEC CHECKSUMS:
-  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  background_location: 1b80c1fe3abd9912bca298618f6e365abf6f588f
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   sensors_plus: 5717760720f7e6acd96fdbd75b7428f5ad755ec2
 
-PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
 
 COCOAPODS: 1.10.2
