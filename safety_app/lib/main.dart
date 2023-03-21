@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:async';
 
 import 'package:sensors_plus/sensors_plus.dart';
 import 'package:background_location/background_location.dart';
@@ -44,6 +45,8 @@ class homeScreen extends StatefulWidget {
 }
 
 class _homeScreenState extends State<homeScreen> {
+  static const platform = MethodChannel('samples.flutter.dev/battery');
+  String _batteryLevel = 'Unknown battery level.';
   bool triggerred = false;
   int lastTap = DateTime.now().millisecondsSinceEpoch;
   int consecutiveTaps = 0;
@@ -51,9 +54,21 @@ class _homeScreenState extends State<homeScreen> {
   @override
   void initState() {
     super.initState();
+    getPermissions();
+    // initAccelerometer();
     if (triggerred) {
       //
     }
+  }
+
+  Future<void> tripleTap() async {
+    // initAccelerometer();
+    locationUpdates();
+    // print("Summoned");
+    // var batteryLevel;
+    // batteryLevel = await platform.invokeMethod(
+    // 'getBatteryLevel');
+    // print(batteryLevel);
   }
 
   Widget build(BuildContext context) {
@@ -166,17 +181,14 @@ class _homeScreenState extends State<homeScreen> {
           onTap: () {
             int now = DateTime.now().millisecondsSinceEpoch;
             if (now - lastTap < 300) {
-              print("tap");
-
               consecutiveTaps++;
               if (consecutiveTaps == 3) {
                 setState(() {
                   triggerred = !triggerred;
                   if (triggerred) {
-                    locationUpdates();
-                    // initAccelerometer();
+                    tripleTap();
                   } else {
-                    stopLocationService_();
+                    // stopLocationService_();
                   }
                 });
               }

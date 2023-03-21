@@ -55,8 +55,23 @@
 	<string>This app needs access to location.</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>processing</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
 		<string>fetch</string>
 		<string>location</string>
+		<string>audio</string>
 	</array>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>workmanager.background.task</string>
+	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>To access audio when in danger</string>
+	<key>NSCameraUsageDescription</key>
+	<string>To access camera when in danger</string>
+	<key>NSMotionUsageDescription</key>
+	<string>To access accelerometer and gyroscope data</string>
 </dict>
 </plist>
