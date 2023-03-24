@@ -1,0 +1,13 @@
+def yt():
+  import requests
+  from bs4 import BeautifulSoup
+  query = "self-defense techniques"
+  url = f"https://www.youtube.com/results?search_query={query}"
+  response=requests.get(url)
+  soup=BeautifulSoup(response.text, "html.parser")
+  results = soup.find("div", {"class": "yt-lockup-content"})
+  
+  title = result.find("a", {"class": "yt-uix-tile-link"})["title"]
+  description = result.find("div", {"class": "yt-lockup-description"}).text.strip()
+  views = result.find("ul", {"class": "yt-lockup-meta-info"}).findAll("li")
+  return f"Title: {title}\nDescription: {description}\nViews: {views}\n"
