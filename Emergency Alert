@@ -1,0 +1,23 @@
+import smtplib
+import smtplib
+
+def send_email(subject, message, to_address):
+    # Replace these values with your email credentials
+    username = "mail"
+    password = "passs"
+    smtp_server = "SMTP server"
+    smtp_port = 723
+    
+    # Set up the connection to the SMTP server
+    server = smtplib.SMTP(smtp_server, smtp_port)
+    server.starttls()
+    server.login(username, password)
+    
+    # Create the email message
+    email_message = "Subject: {}\n\n{}".format(subject, message)
+    
+    # Send the email
+    server.sendmail(username, to_address, email_message)
+    
+    # Close the connection to the SMTP server
+    server.quit()
