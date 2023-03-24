@@ -1,35 +1,28 @@
 def scrape():
-  import mysql.connector
   import feedparser
-
-  config = {
-    'user': 'your_username',
-    'password': 'your_password',
-    'host': 'your_host',
-    'database': 'your_database'
-  }
-  cnx = mysql.connector.connect(**config)
-  cursor = cnx.cursor()
-  CREATE TABLE news (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL,
-    author VARCHAR(255),
-    published_at DATETIME NOT NULL)
-  
-  
-  
-
-
+  article_data=[]
 # Parse the RSS feed
-  url = 'https://www.news18.com/rss/breaking-news.xml'
-  feed = feedparser.parse(url)
-
-# Extract data from the RSS feed
-  for entry in feed.entries:
-      title = entry.title
-      description = entry.description
-      author = entry.author
-      published_at = entry.published
+  url1 = 'https://www.news18.com/rss/breaking-news.xml'
+  url2='https://timesofindia.indiatimes.com/rssfeeds/-2128936835.cms'
+  url3='https://timesofindia.indiatimes.com/rssfeedmostrecent.cms'
+  url4='https://economictimes.indiatimes.com/rssfeedsdefault.cms'
+  feed1 = feedparser.parse(url1)
+  feed2 = feedparser.parse(url2)
+  feed3 = feedparser.parse(url3)
+  feed4 = feedparser.parse(url4)
+  for j in [feed1,feed2,feed3,feed4]:
+    for entry in j.entries:
+      data={}
+      words=    ['crime','murder','rape','harm','danger','knife','killer','kill','shoot','shot','suicide','depression']
+      for i in words:
+        if i.lower()+" " in entry.description.lower():
+          data["title"] = entry.title
+          data["description"] = entry.description
+ #   data["author"] = entry.author
+          data["published_at"] = entry.published
+        
+          article_data.append(data)
+  return article_data
+      
 
 
